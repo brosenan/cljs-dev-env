@@ -14,6 +14,11 @@
             [lein-midje "3.1.3"]
             [axiom-clj/lein-axiom "0.3.0"]]
   :clean-targets ^{:protect false} [:target-path "out" "resources/public/cljs"]
+
+  :profiles {:uberjar {:aot :all}
+             :dev {:dependencies [[midje "1.8.3"]
+                                  [axiom-clj/cloudlog-events "0.3.0"]]}}
+
   :cljsbuild {
               :test-commands {"test" ["lein" "doo" "phantom" "test" "once"]}
               :builds [{:id "dev"             ; development configuration
@@ -41,8 +46,6 @@
                                    :source-map-timestamp true}}]}
   :main ^:skip-aot my-app.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}
-             :dev {:dependencies [[midje "1.8.3"]]}}
 
   :axiom-run-config
   {:zookeeper-config {:url "127.0.0.1:2181"}
